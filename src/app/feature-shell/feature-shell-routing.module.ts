@@ -2,11 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListSpeechComponent } from './list-speech/list-speech.component';
 import { DetailSpeechComponent } from './detail-speech/detail-speech.component';
+import { FeatureShellComponent } from './feature-shell.component';
 
 const featureRoutes: Routes = [
-    { path: 'speeches', component: ListSpeechComponent },
-    { path: 'speeches/detail/:id', component: DetailSpeechComponent }
-];
+    {
+        path: 'speeches',
+        component: FeatureShellComponent,
+        children: [
+            { path: '', component: ListSpeechComponent },
+            { path: 'detail/:id', component: DetailSpeechComponent }
+        ]
+    }
+]
 
 @NgModule({
     imports: [

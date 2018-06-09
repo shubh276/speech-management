@@ -14,3 +14,60 @@
 .mat-column-id {
     flex: 0.3 !important;
 }
+.add-speech-btn{
+    bottom: 30px !important;
+    position: fixed !important;
+    right: 30px !important;
+    outline: none !important;
+  }
+.bg-material{
+    background-color: #3f51b5 !important;
+}
+.features-container{
+    margin-top: 80px;
+}
+.mat-header-cell{
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(63, 81, 181);
+}
+.mat-form-field-wrapper{
+    padding-bottom: 1.15em;
+}
+.text-wrap{
+    word-wrap: break-word;
+}
+.logo{
+    width: 50px;
+}
+.mat-header-row{
+    background: #e9ecef;
+}
+.content-box{
+    height: 200px;
+}
+.btn.disabled, .btn:disabled {
+    cursor: not-allowed;
+}
+.nav-item{
+    margin-right: 20px;
+}
+.modal-header{
+    background: #3f51b5;
+    color: floralwhite;
+}
+.btn-primary{
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+}
+.login-btn{
+    left: 45%;
+    position: fixed;
+    top: 45%;
+}
+.date-picker-input {
+    z-index: 1200;
+}
+.md-datepicker-calendar-pane{
+    z-index: 1200;
+}

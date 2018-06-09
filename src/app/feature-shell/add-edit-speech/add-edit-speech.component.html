@@ -1,3 +1,30 @@
-<p>
-  add-edit-speech works!
-</p>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" *ngIf="!selectedSpeech">Add Speech</h4>
+      <h4 class="modal-title" *ngIf="selectedSpeech">Edit Speech</h4>
+      <button type="button" class="close" (click)="onCancel()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addEditForm">
+        <div class="form-group">
+          <input class="form-control" formControlName="title" placeholder="Enter Title">
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="author" placeholder="Enter Author Name">
+        </div>
+        <div class="form-group ">
+          <input class="form-control" formControlName="date"  placeholder="Enter Date">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control content-box" formControlName="content" placeholder="Enter Content"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="onCancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" [ngClass]="addEditForm.valid ? '' : 'disabled'" (click)="onSubmit(addEditForm.value)">Submit</button>
+    </div>
+
+  </div>
+</div>

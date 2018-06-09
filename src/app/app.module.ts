@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { FeatureShellModule } from './feature-shell/feature-shell.module';
 import { AuthShellComponent } from './auth-shell/auth-shell.component';
 
-
 @NgModule({
   imports: [
     BrowserModule,

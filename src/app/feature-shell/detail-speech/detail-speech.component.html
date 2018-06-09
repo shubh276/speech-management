@@ -1,4 +1,76 @@
-<p>
-  detail-speech works! id is {{id}}.
-</p>
+<div class="speech-details">
+  <div class="jumbotron">
+    <div class="row" *ngIf="selectedSpeech">
+      <div class="col-8 text-wrap">
+        <p>{{selectedSpeech.content}}</p>
+      </div>
+      <div class="col-1">
+        <p>
+          <b>Title</b>
+        </p>
+        <p>
+          <b>Author</b>
+        </p>
+        <p>
+          <b>Date</b>
+        </p>
+        <p>
+          <span>&nbsp;</span>
+          <a (click)="openActionModal($event)" class="example-tooltip-host" matTooltip="Edit" [matTooltipPosition]='tooltipAfter'>
+            <i class="fa fa-edit"></i>
 
+
+          </a>
+
+        </p>
+        <p>
+          <span>&nbsp;</span>
+          <a (click)="deleteWarningModal($event)" class="example-tooltip-host" matTooltip="Delete" [matTooltipPosition]='tooltipAfter'>
+            <i class="fa fa-trash"></i>
+          </a>
+        </p>
+      </div>
+      <div class="col-3">
+        <p>
+          {{selectedSpeech.title}}</p>
+        <p>
+          {{selectedSpeech.author}}</p>
+        <p>
+          {{selectedSpeech.date}}</p>
+
+      </div>
+    </div>
+    <div *ngIf="!selectedSpeech">
+      <p>This speech was deleted</p>
+    </div>
+  </div>
+</div>
+
+<div #addEditModal class="modal" id="addEditModal">
+  <app-add-edit-speech [selectedSpeech]="selectedSpeech" (closeForm)="closeActionModal($event)"></app-add-edit-speech>
+</div>
+
+<div #deleteModal class="modal" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Speech</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p *ngIf="selectedSpeech">Are you sure you want to delete the speech titled "{{selectedSpeech.title}}".</p>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="cancelDelete()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteSpeech()">Yes</button>
+      </div>
+
+    </div>
+  </div>
+</div>

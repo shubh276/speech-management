@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Speech } from '../feature-shell.config';
-import { SPEECHES } from '../../shared/mock-data';
+import { AddEditSpeechComponent } from '../add-edit-speech/add-edit-speech.component';
+import { Router } from '@angular/router';
+import { FeatureShellService } from '../feature-shell.service';
 declare var $;
 
 @Component({
@@ -11,9 +13,9 @@ declare var $;
 })
 export class ListSpeechComponent implements AfterViewInit {
 
-  selectedSpeech: any;
-  speechToDelete: any;
-  deleteSpeechTitle: string;
+  tooltipBefore = 'before';
+  tooltipAfter = 'after';
+  selectedSpeech: Speech;
   authorDropDown: { values: any; selected: string; };
   dropdownData: any;
   filterArray: any[];
@@ -23,13 +25,21 @@ export class ListSpeechComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('deleteModal') deleteModal;
+  @ViewChild(AddEditSpeechComponent) addEditModal: AddEditSpeechComponent;
   public id = 1;
-  tableData = SPEECHES;
+  tableData: Speech[];
 
-  constructor() {
+  constructor(public router: Router, public featureService: FeatureShellService) {
+    this.getAllSpeeches();
     this.dataSource = new MatTableDataSource(this.tableData);
     this.renderDataTable(this.tableData, false);
     this.createDropdowns();
+  }
+
+  getAllSpeeches() {
+    this.featureService.getSpeeches().subscribe(result => {
+      this.tableData = result;
+    });
   }
 
   ngAfterViewInit() {
@@ -121,40 +131,51 @@ export class ListSpeechComponent implements AfterViewInit {
     };
   }
 
-  editSpeech(event, row) {
-    // drftgfv
+  openActionModal(event, row) {
+    this.selectedSpeech = row;
+    $('#addEditModal').modal('show');
   }
 
-  addSpeech() {
-    // dfdv
+  closeActionModal(message) {
+    $('#addEditModal').modal('hide');
+    this.selectedSpeech = null;
+    if (message !== 'true') {
+
+      this.getAllSpeeches();
+      this.renderDataTable(this.tableData, false);
+      setTimeout(function () {
+        alert(message);
+      }, 100);
+    }
+    this.addEditModal.createAddEditForm();
   }
 
   deleteWarningModal(event, row) {
     this.selectedSpeech = row;
-    // this.deleteModal.nativeElement.className = 'modal fade show';
     $('#deleteModal').modal('show');
   }
 
   deleteSpeech() {
-    const totalRows = this.tableData.length;
-    let index = -1;
-    for (let i = 0; i < totalRows; i++) {
-      if (this.tableData[i].id === this.selectedSpeech.id) {
-        index = i;
-        break;
-      }
-    }
-    if (index !== -1) {
-      this.tableData.splice(index, 1);
-    }
-    this.renderDataTable(this.tableData, true);
-    // this.deleteModal.nativeElement.className = 'modal hide';
-    $('#deleteModal').modal('hide');
+    let message = '';
+    this.featureService.deleteSpeech(this.selectedSpeech.id).subscribe(result => {
+      message = result;
+      $('#deleteModal').modal('hide');
+      this.selectedSpeech = null;
+      this.getAllSpeeches();
+      this.renderDataTable(this.tableData, false);
+    });
+    setTimeout(function () {
+      alert(message);
+    }, 100);
   }
 
   cancelDelete() {
     // this.deleteModal.nativeElement.className = 'modal hide';
     $('#deleteModal').modal('hide');
+  }
+
+  goToSpeech(event, id) {
+    this.router.navigate(["speeches/detail", id]);
   }
 
 }
