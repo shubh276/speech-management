@@ -36,6 +36,9 @@
 }
 .text-wrap{
     word-wrap: break-word;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 5px;
 }
 .logo{
     width: 50px;
@@ -70,4 +73,14 @@
 }
 .md-datepicker-calendar-pane{
     z-index: 1200;
+}
+.detail-label{
+    padding: 10px;
+    padding-left: 40px;
+}
+.detail-title{
+    padding: 10px;
+}
+.cursor-hand{
+    cursor: pointer;
 }

@@ -31,11 +31,11 @@ export class DetailSpeechComponent implements OnInit {
 
   openActionModal(event) {
     $('#addEditModal').modal('show');
+    this.addEditModal.setEditFormValues();
   }
 
   closeActionModal(message) {
     $('#addEditModal').modal('hide');
-    this.selectedSpeech = null;
     if (message !== 'true') {
 
       this.getSpeechDetails();
@@ -43,7 +43,7 @@ export class DetailSpeechComponent implements OnInit {
         alert(message);
       }, 100);
     }
-    this.addEditModal.createAddEditForm();
+    // this.addEditModal.createAddEditForm();
   }
 
   deleteWarningModal(event) {

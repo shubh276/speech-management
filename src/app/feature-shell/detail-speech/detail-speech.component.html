@@ -4,24 +4,21 @@
       <div class="col-8 text-wrap">
         <p>{{selectedSpeech.content}}</p>
       </div>
-      <div class="col-1">
+      <!-- <div class="col-4 detail-label">
         <p>
-          <b>Title</b>
+          <b>Title :</b> {{selectedSpeech.title}}
         </p>
         <p>
-          <b>Author</b>
+          <b>Author :</b> {{selectedSpeech.author}}
         </p>
         <p>
-          <b>Date</b>
+          <b>Date : </b >{{selectedSpeech.date}}
         </p>
         <p>
           <span>&nbsp;</span>
           <a (click)="openActionModal($event)" class="example-tooltip-host" matTooltip="Edit" [matTooltipPosition]='tooltipAfter'>
             <i class="fa fa-edit"></i>
-
-
           </a>
-
         </p>
         <p>
           <span>&nbsp;</span>
@@ -29,15 +26,33 @@
             <i class="fa fa-trash"></i>
           </a>
         </p>
-      </div>
-      <div class="col-3">
-        <p>
-          {{selectedSpeech.title}}</p>
-        <p>
-          {{selectedSpeech.author}}</p>
-        <p>
-          {{selectedSpeech.date}}</p>
-
+      </div> -->
+      <div class="col-4 detail-label">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><b>Title</b></td>
+              <td>{{selectedSpeech.title}}</td>
+            </tr>
+            <tr>
+              <td><b>Author</b></td>
+              <td>{{selectedSpeech.author}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><b>Date</b></td>
+              <td>{{selectedSpeech.date}}</td>
+            </tr>
+            <tr>
+                <td><a (click)="openActionModal($event)" class="cursor-hand example-tooltip-host" matTooltip="Edit" [matTooltipPosition]='tooltipAfter'>
+                    <i class="fa fa-edit"></i>
+                  </a></td>
+                <td><a (click)="deleteWarningModal($event)" class="cursor-hand example-tooltip-host" matTooltip="Delete" [matTooltipPosition]='tooltipAfter'>
+                    <i class="fa fa-trash"></i>
+                  </a></td>
+              </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div *ngIf="!selectedSpeech">

@@ -15,6 +15,9 @@ export class AddEditSpeechComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public featureService: FeatureShellService) {
     this.createAddEditForm();
+    if (this.selectedSpeech) {
+      this.setEditFormValues();
+    }
   }
 
   ngOnInit() {
