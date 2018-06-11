@@ -142,6 +142,7 @@ export class ListSpeechComponent implements AfterViewInit {
     if (message !== 'true') {
 
       this.getAllSpeeches();
+      this.createDropdowns();
       this.renderDataTable(this.tableData, false);
       setTimeout(function () {
         alert(message);

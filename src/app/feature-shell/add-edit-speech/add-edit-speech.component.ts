@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Speech } from '../feature-shell.config';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeatureShellService } from '../feature-shell.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-edit-speech',
@@ -59,7 +60,8 @@ export class AddEditSpeechComponent implements OnInit {
       newSpeech['author'] = formData.author;
       newSpeech['title'] = formData.title;
       newSpeech['content'] = formData.content;
-      newSpeech['date'] = formData.date;
+      const date = new DatePipe('en-US').transform(formData.date, 'yyyy-MM-dd');
+      newSpeech['date'] = date.toString() ;
       let message = '';
       if (this.selectedSpeech) {
         this.featureService.editSpeech(newSpeech).subscribe(result => {

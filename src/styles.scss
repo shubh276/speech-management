@@ -84,3 +84,18 @@
 .cursor-hand{
     cursor: pointer;
 }
+.cdk-overlay-container{
+    z-index: 2000;
+}
+.cdk-overlay-pane{
+    z-index: 2000;
+}
+.mat-icon-button:focus{
+    outline: none;
+}
+.mat-datepicker-toggle{
+    margin-left: -41px;
+}
+.date-input{
+    float: left;
+}
